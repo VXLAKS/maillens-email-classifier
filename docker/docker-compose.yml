@@ -1,0 +1,32 @@
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    working_dir: /app
+    command: ["uvicorn", "app.api:app", "--host", "0.0.0.0", "--port", "8000"]
+    volumes:
+      - ../results:/app/results
+      - ../logs:/app/logs
+    environment:
+      - RESULTS_DIR=results
+      - LOGS_DIR=logs
+      - TOP_N_DEFAULT=5
+      - THRESHOLD_UNDEFINED=0.30
+      - EMBEDDING_MODEL_NAME=intfloat/multilingual-e5-small
+      # - USE_CUDA=1   # enable if your container has CUDA+torch support
+    ports:
+      - "8000:8000"
+
+  ui:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    working_dir: /app
+    command: ["streamlit", "run", "ui/streamlit_app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+    depends_on:
+      - api
+    environment:
+      - API_URL=http://api:8000
+    ports:
+      - "8501:8501"
