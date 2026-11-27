@@ -1,0 +1,27 @@
+From: billing@company.com
+To: user@company.com
+Subject: Invoice attached (TXT)
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============5375901864020114331=="
+
+--===============5375901864020114331==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please see the attached invoice.
+
+Regards,
+Finance
+
+--===============5375901864020114331==
+Content-Type: text/plain
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="invoice.txt"
+MIME-Version: 1.0
+
+SU5WT0lDRSBBVFRBQ0hNRU5UOiBBbW91bnQgMTI1MCBFVVIuIFBheW1lbnQgZGVhZGxpbmUgSmFu
+IDEwLgo=
+
+--===============5375901864020114331==--
